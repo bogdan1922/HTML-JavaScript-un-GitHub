@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <title>Kontrolējams kvadrāts</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let square = {
+      x: 50,
+      y: 50,
+      size: 50,
+      color: 'green',
+      speed: 5
+    };
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = square.color;
+      ctx.fillRect(square.x, square.y, square.size, square.size);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      switch(e.key) {
+        case 'ArrowUp':
+          square.y = Math.max(0, square.y - square.speed);
+          break;
+        case 'ArrowDown':
+          square.y = Math.min(canvas.height - square.size, square.y + square.speed);
+          break;
+        case 'ArrowLeft':
+          square.x = Math.max(0, square.x - square.speed);
+          break;
+        case 'ArrowRight':
+          square.x = Math.min(canvas.width - square.size, square.x + square.speed);
+          break;
+        case 'g':
+        case 'G':
+          square.color = 'green';
+          break;
+        case 'b':
+        case 'B':
+          square.color = 'black';
+          break;
+        case 'o':
+        case 'O':
+          square.color = 'orange';
+          break;
+      }
+      draw();
+    });
+
+    draw();
+  </script>
+</body>
+</html>
